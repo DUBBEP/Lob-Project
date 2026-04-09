@@ -25,18 +25,6 @@ public class MoveLeft : Command
         controller.Move();
     }
 }
-public class MoveRight : Command
-{
-    public MoveRight(FirstPersonController targetPlayer)
-    {
-        controller = targetPlayer;
-    }
-
-    public override void Execute()
-    {
-        controller.Move();
-    }
-}
 public class Jump : Command
 {
     public Jump(FirstPersonController targetPlayer)

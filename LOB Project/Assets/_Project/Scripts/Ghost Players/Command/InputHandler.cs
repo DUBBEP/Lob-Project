@@ -24,8 +24,6 @@ public class InputHandler : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
             invoker.ExecuteCommand(new MoveLeft(player));
-        else if (Input.GetKey(KeyCode.D))
-            invoker.ExecuteCommand(new MoveRight(player));
     }
 
 
