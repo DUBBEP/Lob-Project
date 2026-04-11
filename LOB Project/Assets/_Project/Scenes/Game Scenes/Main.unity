@@ -1010,47 +1010,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resetTimer: 30
   resetSequence: {fileID: 1931944118}
-<<<<<<< HEAD
-=======
---- !u!1 &1171907310 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6939133595653385379, guid: 091ee26b2df4e894d9d1ef7a3b68081c,
-    type: 3}
-  m_PrefabInstance: {fileID: 43305695}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1171907312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1171907310}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 0.48427665, g: 0.102033034, b: 0.102033034, a: 1}
-  outlineWidth: 0
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &1171907313
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1171907310}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bdf40fea4d531b43a1a5e7c4487872e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lookPercentageLabel: {fileID: 1320993512}
-  LookPercentage: 0
->>>>>>> 083678c98794a7085d279861d22a370d306f1f8d
 --- !u!1001 &1254306373
 PrefabInstance:
   m_ObjectHideFlags: 0
