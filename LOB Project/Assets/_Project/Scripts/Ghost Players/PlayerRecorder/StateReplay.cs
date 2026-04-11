@@ -22,9 +22,16 @@ public class StateReplay : MonoBehaviour
         StartCoroutine(RunReplay(replay));
     }
 
+    public void StartSmoothReplay (ReplayData replay)
+    {
+        activeReplays.Add(replay);
+        StartCoroutine(RunReplaySmooth(replay));
+    }
+
     private IEnumerator RunReplay(ReplayData replay)
     {
         float replayTime = 0;
+
         while (replay.log.recordedSnapshots.Count > 0)
         {
             replayTime += Time.deltaTime;
@@ -40,6 +47,42 @@ public class StateReplay : MonoBehaviour
             }
 
             yield return new WaitForFixedUpdate();
+        }
+
+        activeReplays.Remove(replay);
+    }
+
+    private IEnumerator RunReplaySmooth(ReplayData replay)
+    {
+        float replayTime = 0;
+
+        Vector3 lastPosition = replay.target.position;
+        Quaternion lastRotation = replay.target.rotation;
+        float lastTimestamp = 0;
+
+        while (replay.log.recordedSnapshots.Count > 0)
+        {
+            replayTime += Time.deltaTime;
+            TransformSnapshot nextSnapshot = replay.log.recordedSnapshots.Peek();
+
+            float timeSegment = nextSnapshot.timeStamp - lastTimestamp;
+            float progress = (replayTime - lastTimestamp) / timeSegment;
+
+            replay.target.position = Vector3.Lerp(lastPosition, nextSnapshot.position, progress);
+            replay.target.rotation = Quaternion.Slerp(lastRotation, nextSnapshot.rotation, progress);
+
+            Debug.Log($"Snapshot Time Stamp: {nextSnapshot.timeStamp} VS Replay Time: {replayTime}");
+
+            if (replayTime >= nextSnapshot.timeStamp)
+            {
+                replay.log.recordedSnapshots.Dequeue();
+
+                lastPosition = nextSnapshot.position;
+                lastRotation = nextSnapshot.rotation;
+                lastTimestamp = nextSnapshot.timeStamp;
+            }
+
+            yield return null;
         }
 
         activeReplays.Remove(replay);
