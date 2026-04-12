@@ -35,7 +35,7 @@ public class StateReplay : MonoBehaviour
         Queue<TransformSnapshot> queue = new Queue<TransformSnapshot>(replay.log.recordedSnapshots);
         float replayTime = 0;
 
-        while (replay.log.recordedSnapshots.Count > 0)
+        while (queue.Count > 0)
         {
             replayTime += Time.deltaTime;
             TransformSnapshot snapshot = queue.Peek();
@@ -64,7 +64,7 @@ public class StateReplay : MonoBehaviour
         Quaternion lastRotation = replay.target.rotation;
         float lastTimestamp = 0;
 
-        while (replay.log.recordedSnapshots.Count > 0)
+        while (queue.Count > 0)
         {
             replayTime += Time.deltaTime;
             TransformSnapshot nextSnapshot = queue.Peek();

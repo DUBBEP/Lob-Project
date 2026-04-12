@@ -4,11 +4,11 @@ using UnityEngine;
 public class StateRecorder : MonoBehaviour
 {
     [Range(0.001f, 5f)][SerializeField] private float recordingHeatbeatInverval;
-    [SerializeField] private BackendGhostPlayerConnector connector;
 
     public SnapshotLog log { get; private set; } = new SnapshotLog();
     private float logDuration;
     private bool isRecording = false;
+    private BackendGhostPlayerConnector connector;
 
     public static StateRecorder Instance;
 
@@ -18,6 +18,10 @@ public class StateRecorder : MonoBehaviour
             Instance = this;
         else
             Destroy(this);
+    }
+    private void Start()
+    {
+        connector = FindFirstObjectByType<BackendGhostPlayerConnector>();
     }
 
     public void StartRecording(Transform target, float duration)

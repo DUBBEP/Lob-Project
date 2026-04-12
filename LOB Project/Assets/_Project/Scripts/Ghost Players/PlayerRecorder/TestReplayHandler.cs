@@ -8,7 +8,14 @@ public class TestReplayHandler : MonoBehaviour
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform replayTargetTransform;
 
-    private ReplayData replayData;
+    private BackendGhostPlayerConnector connector;
+
+    private ReplayData replayData = new ReplayData();
+
+    private void Start()
+    {
+        connector = FindFirstObjectByType<BackendGhostPlayerConnector>();
+    }
 
     private void Update()
     {
@@ -21,6 +28,11 @@ public class TestReplayHandler : MonoBehaviour
         {
             MakeReplayData();
             StateRecorder.Instance.SaveRecordingToDatabase();
+        }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            GetFirstInDatabase();
         }
 
         if (Input.GetKeyDown(KeyCode.P))
@@ -37,7 +49,7 @@ public class TestReplayHandler : MonoBehaviour
                 return;
             }
 
-            StateReplay.Instance.StartReplay(replayData);
+            StateReplay.Instance.StartSmoothReplay(replayData);
         }
     }
 
@@ -49,10 +61,21 @@ public class TestReplayHandler : MonoBehaviour
             return;
         }
 
-        replayData = new ReplayData()
+        replayData.target = replayTargetTransform;
+        replayData.log = StateRecorder.Instance.log;
+    }
+
+    public async void GetFirstInDatabase()
+    {
+        GhostRecord record = await connector.GetShowAsync(3);
+
+        if (record == null)
         {
-            target = replayTargetTransform,
-            log = StateRecorder.Instance.log,
-        };
+            Debug.Log("Record Retrieved from database was null");
+            return;
+        }
+
+        replayData.target = replayTargetTransform;
+        replayData.log = record.actions;
     }
 }
