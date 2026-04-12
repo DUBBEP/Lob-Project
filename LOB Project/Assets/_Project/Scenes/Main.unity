@@ -818,6 +818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recordingHeatbeatInverval: 0.06
+  connector: {fileID: 640463034}
 --- !u!114 &640463031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -872,7 +873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6b25a978d51777438446fd35012ecc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseUrl: http://127.0.0.1:8000/api/GhostRecord
+  baseUrl: http://127.0.0.1:8000/api/GhostRecords
 --- !u!1 &642560781
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,10 +4,10 @@ using UnityEngine;
 public class StateRecorder : MonoBehaviour
 {
     [Range(0.001f, 5f)][SerializeField] private float recordingHeatbeatInverval;
+    [SerializeField] private BackendGhostPlayerConnector connector;
 
     public SnapshotLog log { get; private set; } = new SnapshotLog();
     private float logDuration;
-    BackendGhostPlayerConnector connector;
     private bool isRecording = false;
 
     public static StateRecorder Instance;
@@ -36,6 +36,7 @@ public class StateRecorder : MonoBehaviour
 
     public async void SaveRecordingToDatabase()
     {
+        Debug.Log($"Log being sent is {log}");
         GhostRecord data = new GhostRecord()
         {
             username = "TempUsername", // Method call to get Username
@@ -70,7 +71,7 @@ public class StateRecorder : MonoBehaviour
                     timeStamp = recordTime,
                 };
 
-                log.recordedSnapshots.Enqueue(snapshot);
+                log.recordedSnapshots.Add(snapshot);
                 Debug.Log("Recorded Time: " + snapshot.timeStamp);
 
                 interval += recordingHeatbeatInverval;

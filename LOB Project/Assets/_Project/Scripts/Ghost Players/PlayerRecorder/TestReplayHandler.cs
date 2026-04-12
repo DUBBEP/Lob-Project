@@ -20,6 +20,7 @@ public class TestReplayHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.M))
         {
             MakeReplayData();
+            StateRecorder.Instance.SaveRecordingToDatabase();
         }
 
         if (Input.GetKeyDown(KeyCode.P))

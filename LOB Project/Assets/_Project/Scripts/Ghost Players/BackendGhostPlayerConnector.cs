@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 public class BackendGhostPlayerConnector : MonoBehaviour
 {
     [SerializeField]
-    private string baseUrl = "http://127.0.0.1:8000/api/GhostRecord";
+    private string baseUrl = "http://127.0.0.1:8000/api/GhostRecords";
     public void SetURL(string url) => baseUrl = url;
     public string GetURL() => baseUrl;
 
@@ -64,6 +64,7 @@ public class BackendGhostPlayerConnector : MonoBehaviour
             request.uploadHandler = new UploadHandlerRaw(bodyRaw);
             request.downloadHandler = new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
+            request.SetRequestHeader("Accept", "application/json");
 
             var operation = request.SendWebRequest();
             while (!operation.isDone) await Task.Yield();

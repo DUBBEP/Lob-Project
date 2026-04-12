@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class TransformSnapshot
 {
     public Transform target;
@@ -15,12 +16,14 @@ public class TransformSnapshot
     }
 }
 
+[System.Serializable]
 public class SnapshotLog
 {
     public Vector3 startPosition;
-    public Queue<TransformSnapshot> recordedSnapshots = new Queue<TransformSnapshot>();
+    public List<TransformSnapshot> recordedSnapshots = new List<TransformSnapshot>();
 }
 
+[System.Serializable]
 public class ReplayData
 {
     public Transform target;

@@ -24,24 +24,27 @@ public class StateReplay : MonoBehaviour
 
     public void StartSmoothReplay (ReplayData replay)
     {
+        Queue<TransformSnapshot> queue = new Queue<TransformSnapshot>(replay.log.recordedSnapshots);
+
         activeReplays.Add(replay);
         StartCoroutine(RunReplaySmooth(replay));
     }
 
     private IEnumerator RunReplay(ReplayData replay)
     {
+        Queue<TransformSnapshot> queue = new Queue<TransformSnapshot>(replay.log.recordedSnapshots);
         float replayTime = 0;
 
         while (replay.log.recordedSnapshots.Count > 0)
         {
             replayTime += Time.deltaTime;
-            TransformSnapshot snapshot = replay.log.recordedSnapshots.Peek();
+            TransformSnapshot snapshot = queue.Peek();
 
             Debug.Log($"Snapshot Time Stamp: {snapshot.timeStamp} VS Replay Time: {replayTime}");
             
             if (replayTime >= snapshot.timeStamp)
             {
-                replay.log.recordedSnapshots.Dequeue();
+                queue.Dequeue();
                 snapshot.target = replay.target;
                 snapshot.UpdateTargetTransform();
             }
@@ -54,6 +57,7 @@ public class StateReplay : MonoBehaviour
 
     private IEnumerator RunReplaySmooth(ReplayData replay)
     {
+        Queue<TransformSnapshot> queue = new Queue<TransformSnapshot>(replay.log.recordedSnapshots);
         float replayTime = 0;
 
         Vector3 lastPosition = replay.target.position;
@@ -63,7 +67,7 @@ public class StateReplay : MonoBehaviour
         while (replay.log.recordedSnapshots.Count > 0)
         {
             replayTime += Time.deltaTime;
-            TransformSnapshot nextSnapshot = replay.log.recordedSnapshots.Peek();
+            TransformSnapshot nextSnapshot = queue.Peek();
 
             float timeSegment = nextSnapshot.timeStamp - lastTimestamp;
             float progress = (replayTime - lastTimestamp) / timeSegment;
@@ -75,7 +79,7 @@ public class StateReplay : MonoBehaviour
 
             if (replayTime >= nextSnapshot.timeStamp)
             {
-                replay.log.recordedSnapshots.Dequeue();
+                queue.Dequeue();
 
                 lastPosition = nextSnapshot.position;
                 lastRotation = nextSnapshot.rotation;
