@@ -47,7 +47,7 @@ public class Clicker : MonoBehaviour
                 
         }
 
-        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Tab)) && isSwitched)
+        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.Tab)) && isSwitched)
         {
             switcher.SwitchCameras();
             isSwitched = false;
