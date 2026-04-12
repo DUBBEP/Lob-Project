@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class BackendPlayerRecordConnector : MonoBehaviour
 {
-    private string baseUrl = "http://127.0.0.1:8000/api/PlayerRecord";
+    private string baseUrl = "http://127.0.0.1:8000/api/PlayerRecords";
     public void SetURL(string url) => baseUrl = url;
     public string GetURL() => baseUrl;
 
