@@ -6,8 +6,8 @@ public class StateRecorder : MonoBehaviour
     [Range(0.001f, 5f)][SerializeField] private float recordingHeatbeatInverval;
 
     public SnapshotLog log { get; private set; } = new SnapshotLog();
+    public bool isRecording { get; private set; } = false;
     private float logDuration;
-    private bool isRecording = false;
     private BackendGhostPlayerConnector connector;
 
     public static StateRecorder Instance;

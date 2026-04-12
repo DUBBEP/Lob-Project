@@ -817,8 +817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd4d13c0b1bc3e947823299be194c3b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recordingHeatbeatInverval: 0.06
-  connector: {fileID: 640463034}
+  recordingHeatbeatInverval: 0.15
 --- !u!114 &640463031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1075,6 +1074,7 @@ GameObject:
   - component: {fileID: 818752744}
   - component: {fileID: 818752742}
   - component: {fileID: 818752746}
+  - component: {fileID: 818752747}
   m_Layer: 0
   m_Name: LobotomyEffects
   m_TagString: Untagged
@@ -1207,6 +1207,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resetTimer: 30
   resetSequence: {fileID: 1931944118}
+--- !u!114 &818752747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818752736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e81674102a0174842b1e560e6fd71d70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1136268940
 GameObject:
   m_ObjectHideFlags: 0
@@ -1235,8 +1247,8 @@ Transform:
   m_GameObject: {fileID: 1136268940}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.725, y: 0.661, z: 0}
-  m_LocalScale: {x: 1, y: 0.34107, z: 0.18271}
+  m_LocalPosition: {x: 0, y: 0.661, z: 0.75}
+  m_LocalScale: {x: 0.1, y: 0.34107, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 597833771}

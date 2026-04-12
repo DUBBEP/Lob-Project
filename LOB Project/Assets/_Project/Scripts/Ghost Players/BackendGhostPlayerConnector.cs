@@ -24,7 +24,7 @@ public class BackendGhostPlayerConnector : MonoBehaviour
                 // Wrap the array so JsonUtility can read it
                 string json = "{\"items\":" + request.downloadHandler.text + "}";
                 GhostRecordWrapper wrapper = JsonUtility.FromJson<GhostRecordWrapper>(json);
-                return new List<GhostRecord>(wrapper.records);
+                return new List<GhostRecord>(wrapper.items);
             }
             return null;
         }
@@ -87,6 +87,27 @@ public class BackendGhostPlayerConnector : MonoBehaviour
             // If we reach here, something went wrong
             Debug.LogError($"Store Failed. Code: {request.responseCode} | Error: {request.downloadHandler.text}");
             return false;
+        }
+    }
+
+    public async Task<List<GhostRecord>> GetRandomRecordsAsync()
+    {
+        // Note the /random at the end of the URL
+        using (UnityWebRequest request = UnityWebRequest.Get($"{baseUrl}/random"))
+        {
+            var operation = request.SendWebRequest();
+            while (!operation.isDone) await Task.Yield();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                // Re-using the same wrapper logic you have for Index
+                string json = "{\"items\":" + request.downloadHandler.text + "}";
+                GhostRecordWrapper wrapper = JsonUtility.FromJson<GhostRecordWrapper>(json);
+                return new List<GhostRecord>(wrapper.items);
+            }
+
+            Debug.LogError($"Failed to fetch random records: {request.error}");
+            return null;
         }
     }
 }

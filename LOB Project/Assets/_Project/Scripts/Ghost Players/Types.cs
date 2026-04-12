@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class GhostRecord
 {
     public int id;
@@ -11,7 +12,8 @@ public class GhostRecord
     public string ToJson() => JsonUtility.ToJson(this);
 }
 
+[System.Serializable]
 public class GhostRecordWrapper
 {
-    public GhostRecord[] records;
+    public GhostRecord[] items;
 }
