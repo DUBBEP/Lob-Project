@@ -35,6 +35,7 @@ public class ChatBox : MonoBehaviour//Pun
     {
         if (chatInput.text.Length > 0)
         {
+            Log("Steve", chatInput.text);
             //photonView.RPC("Log", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName, chatInput.text);
             chatInput.text = "";
         }

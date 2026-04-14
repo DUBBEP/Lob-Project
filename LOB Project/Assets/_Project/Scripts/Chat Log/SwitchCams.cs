@@ -9,7 +9,8 @@ public class SwitchCams : MonoBehaviour
     [SerializeField] private SelectionManager selection_manager;
     [SerializeField] private Canvas computer_canvas;
 
-    private bool currentState;
+    //private bool currentState;
+
     public void SwitchCameras()
     {
         // Toggle the enabled state of both cameras
