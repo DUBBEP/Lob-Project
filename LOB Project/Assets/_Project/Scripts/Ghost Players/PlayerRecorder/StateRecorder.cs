@@ -69,7 +69,6 @@ public class StateRecorder : MonoBehaviour
             {
                 TransformSnapshot snapshot = new TransformSnapshot()
                 {
-                    target = target,
                     position = target.position,
                     rotation = target.rotation,
                     timeStamp = recordTime,

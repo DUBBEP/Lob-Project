@@ -45,8 +45,7 @@ public class StateReplay : MonoBehaviour
             if (replayTime >= snapshot.timeStamp)
             {
                 queue.Dequeue();
-                snapshot.target = replay.target;
-                snapshot.UpdateTargetTransform();
+                snapshot.UpdateTargetTransform(replay.target);
             }
 
             yield return new WaitForFixedUpdate();

@@ -4,12 +4,11 @@ using UnityEngine;
 [System.Serializable]
 public class TransformSnapshot
 {
-    public Transform target;
     public Vector3 position;
     public Quaternion rotation;
     public float timeStamp;
 
-    public void UpdateTargetTransform()
+    public void UpdateTargetTransform(Transform target)
     {
         target.position = position;
         target.rotation = rotation;
