@@ -8,6 +8,14 @@ public class LobotomyEffectShatter : MonoBehaviour, ILobotomyEffect
     private GameObject particleEffectPrefab;
 
     private float cooldown;
+
+    [SerializeField] private float _selectionWeight;
+
+    public float GetEffectSelectionPriority()
+    {
+        return _selectionWeight;
+    }
+
     public void StartEffect(Transform selection)
     {
         selection.gameObject.SetActive(false);

@@ -2,16 +2,20 @@ using UnityEngine;
 
 public class LobotomyEffectChase : MonoBehaviour, ILobotomyEffect
 {
-    [SerializeField]
-    private float followSpeed = 1f;
+    [SerializeField] private float followSpeed = 1f;
     private bool _effectIsActive;
 
-    [SerializeField]
-    private AudioSource _slidingAudio;
-    [SerializeField]
-    private Transform player;
+    [SerializeField] private AudioSource _slidingAudio;
+    [SerializeField] private Transform player;
     
     private Transform _selection;
+
+    [SerializeField] private float _selectionWeight;
+
+    public float GetEffectSelectionPriority()
+    {
+        return _selectionWeight;
+    }
 
     public void StartEffect(Transform selection)
     {

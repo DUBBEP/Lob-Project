@@ -30,6 +30,13 @@ public class LobotomyEffectResetPositions : MonoBehaviour, ILobotomyEffect
 
     private List<startState> _selectablesInScene = new List<startState>();
 
+    [SerializeField] private float _selectionWeight;
+
+    public float GetEffectSelectionPriority()
+    {
+        return _selectionWeight;
+    }
+
     private void Start()
     {
         GameObject[] selectableObjects = GameObject.FindGameObjectsWithTag("Selectable");

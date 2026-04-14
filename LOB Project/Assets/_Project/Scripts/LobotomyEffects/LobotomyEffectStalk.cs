@@ -11,6 +11,14 @@ public class LobotomyEffectStalk : MonoBehaviour, ILobotomyEffect
     private Transform player;
     private List<Transform> _selections = new List<Transform>();
     private Transform _currentSelection;
+
+    [SerializeField] private float _selectionWeight;
+
+    public float GetEffectSelectionPriority()
+    {
+        return _selectionWeight;
+    }
+
     public void StartEffect(Transform selection)
     {
         _currentSelection = selection;
