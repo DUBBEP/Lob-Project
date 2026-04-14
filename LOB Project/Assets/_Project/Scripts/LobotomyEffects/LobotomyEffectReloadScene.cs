@@ -8,6 +8,14 @@ public class LobotomyEffectReloadScene : MonoBehaviour, ILobotomyEffect
     private GameObject resetSequence;
 
     bool countdown;
+
+    [SerializeField] private float _selectionWeight;
+
+    public float GetEffectSelectionPriority()
+    {
+        return _selectionWeight;
+    }
+
     public void StartEffect(Transform selection)
     {
         countdown = true;

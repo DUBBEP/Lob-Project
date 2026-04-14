@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class LobotomyEffectPlaySound : MonoBehaviour, ILobotomyEffect
 {
-    [SerializeField]
-    private AudioSource _audio;
+    [SerializeField] private AudioSource _audio;
+    [SerializeField] private float _selectionWeight;
+
+    public float GetEffectSelectionPriority()
+    {
+        return _selectionWeight;
+    }
+
     public void StartEffect(Transform selection)
     {
         if (!_audio.isPlaying)
