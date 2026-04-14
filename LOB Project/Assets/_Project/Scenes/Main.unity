@@ -817,7 +817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd4d13c0b1bc3e947823299be194c3b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recordingHeatbeatInverval: 0.15
+  recordingHeatbeatInverval: 0.1
 --- !u!114 &640463031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1041,7 +1041,8 @@ Transform:
   m_LocalPosition: {x: -5.279684, y: 0.007963337, z: -9.091988}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 818752737}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &695711388
@@ -1075,6 +1076,7 @@ GameObject:
   - component: {fileID: 818752742}
   - component: {fileID: 818752746}
   - component: {fileID: 818752747}
+  - component: {fileID: 818752748}
   m_Layer: 0
   m_Name: LobotomyEffects
   m_TagString: Untagged
@@ -1090,12 +1092,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 818752736}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 965.27966, y: 539.99207, z: 9.091988}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 695711387}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &818752738
 MonoBehaviour:
@@ -1112,6 +1114,7 @@ MonoBehaviour:
   followSpeed: 0.3
   _slidingAudio: {fileID: 392952741}
   player: {fileID: 1254306374}
+  _selectionWeight: 50
 --- !u!114 &818752739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1126,6 +1129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followSpeed: 0.05
   player: {fileID: 1254306374}
+  _selectionWeight: 50
 --- !u!114 &818752740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1140,6 +1144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleEffectPrefab: {fileID: 3859277395000615260, guid: 19bc9ba8ec3160741aeea7b631634303,
     type: 3}
+  _selectionWeight: 50
 --- !u!114 &818752741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1154,6 +1159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FlashBangEffect: {fileID: 642560781}
   fogColor: {r: 0.254717, g: 0.14538093, b: 0.14538093, a: 0}
+  _selectionWeight: 50
 --- !u!114 &818752742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1167,6 +1173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audio: {fileID: 1609259211}
+  _selectionWeight: 50
 --- !u!114 &818752744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1180,6 +1187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audio: {fileID: 1352217376}
+  _selectionWeight: 50
 --- !u!114 &818752745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1193,6 +1201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audio: {fileID: 1308792868}
+  _selectionWeight: 50
 --- !u!114 &818752746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1207,6 +1216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resetTimer: 30
   resetSequence: {fileID: 1931944118}
+  _selectionWeight: 50
 --- !u!114 &818752747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1219,6 +1229,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e81674102a0174842b1e560e6fd71d70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _selectionWeight: 5
+--- !u!114 &818752748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818752736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2080f80a304811e4682e75d8f67dabb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  recordingDuration: 0
+  _selectionWeight: 0.2
 --- !u!1 &1136268940
 GameObject:
   m_ObjectHideFlags: 0
@@ -3090,7 +3116,6 @@ SceneRoots:
   - {fileID: 1550730621}
   - {fileID: 1564519004}
   - {fileID: 695711387}
-  - {fileID: 818752737}
   - {fileID: 1596556895}
   - {fileID: 1671565420}
   - {fileID: 89753537}

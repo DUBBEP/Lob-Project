@@ -7,7 +7,7 @@ public class LobotomyEffectGhostReplay : MonoBehaviour, ILobotomyEffect
 
     private BackendGhostPlayerConnector connector;
 
-    [SerializeField] private float _selectionWeight;
+    [Range(1, 100)][SerializeField] private float _selectionWeight;
 
     public float GetEffectSelectionPriority()
     {

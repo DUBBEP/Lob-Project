@@ -3,34 +3,11 @@ using UnityEngine;
 
 public class LobotomyEffectResetPositions : MonoBehaviour, ILobotomyEffect
 {
-    public struct startState
-    {
-        public Transform selectabe;
-        public Vector3 position;
-        public Vector3 rotation;
-        public startState(Transform selectable, Vector3 position, Vector3 rotation)
-        {
-            this.selectabe = selectable;
-            this.position = position;
-            this.rotation = rotation;
-        }
+    [SerializeField] private GameObject FlashBangEffect;
+    [SerializeField] private Color fogColor;
+    [Range(1, 100)][SerializeField] private float _selectionWeight;
 
-        public void ResetState()
-        {
-            selectabe.position = position;
-            selectabe.rotation = Quaternion.Euler(rotation);
-        }
-    }
-
-    [SerializeField]
-    private GameObject FlashBangEffect;
-    [SerializeField]
-    private Color fogColor;
-
-
-    private List<startState> _selectablesInScene = new List<startState>();
-
-    [SerializeField] private float _selectionWeight;
+    private List<ObjectStartState> _selectablesInScene = new List<ObjectStartState>();
 
     public float GetEffectSelectionPriority()
     {
@@ -43,8 +20,8 @@ public class LobotomyEffectResetPositions : MonoBehaviour, ILobotomyEffect
 
         foreach (GameObject selectableObject in selectableObjects)
         {
-            _selectablesInScene.Add(new startState(selectableObject.transform, 
-                selectableObject.transform.position, selectableObject.transform.rotation.eulerAngles));
+            _selectablesInScene.Add(new ObjectStartState(selectableObject.transform, 
+                selectableObject.transform.position, selectableObject.transform.rotation));
         }
     }
 
@@ -53,7 +30,7 @@ public class LobotomyEffectResetPositions : MonoBehaviour, ILobotomyEffect
         if (FlashBangEffect.activeSelf)
             return;
 
-        foreach (startState state in _selectablesInScene)
+        foreach (ObjectStartState state in _selectablesInScene)
         {
             state.ResetState();
         }
@@ -66,8 +43,5 @@ public class LobotomyEffectResetPositions : MonoBehaviour, ILobotomyEffect
         RenderSettings.ambientLight = Color.red;
     }
 
-    public void StopEffect(Transform selection)
-    {
-        return;
-    }
+    public void StopEffect(Transform selection) { }
 }

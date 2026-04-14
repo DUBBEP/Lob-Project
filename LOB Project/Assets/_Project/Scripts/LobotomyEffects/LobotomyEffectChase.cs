@@ -10,7 +10,7 @@ public class LobotomyEffectChase : MonoBehaviour, ILobotomyEffect
     
     private Transform _selection;
 
-    [SerializeField] private float _selectionWeight;
+    [Range(1, 100)][SerializeField] private float _selectionWeight;
 
     public float GetEffectSelectionPriority()
     {

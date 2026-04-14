@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class LobotomyEffectShatter : MonoBehaviour, ILobotomyEffect
 {
-    [SerializeField]
-    private GameObject particleEffectPrefab;
+    [SerializeField] private GameObject particleEffectPrefab;
 
     private float cooldown;
 
-    [SerializeField] private float _selectionWeight;
+    [Range(1, 100)][SerializeField] private float _selectionWeight;
 
     public float GetEffectSelectionPriority()
     {

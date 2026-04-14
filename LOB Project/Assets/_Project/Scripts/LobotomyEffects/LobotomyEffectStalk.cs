@@ -3,16 +3,14 @@ using UnityEngine;
 
 public class LobotomyEffectStalk : MonoBehaviour, ILobotomyEffect
 {
-    [SerializeField]
-    private float followSpeed = 1f;
+    [SerializeField] private float followSpeed = 1f;
     private bool _effectIsActive;
 
-    [SerializeField]
-    private Transform player;
+    [SerializeField] private Transform player;
     private List<Transform> _selections = new List<Transform>();
     private Transform _currentSelection;
 
-    [SerializeField] private float _selectionWeight;
+    [Range(1, 100)][SerializeField] private float _selectionWeight;
 
     public float GetEffectSelectionPriority()
     {
