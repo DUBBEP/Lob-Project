@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-[SerializeField]
+[System.Serializable]
 public class ChatLog
 {
     public int id;
@@ -14,7 +14,7 @@ public class ChatLog
     public string ToJson() => JsonUtility.ToJson(this);
 }
 
-[SerializeField]
+[System.Serializable]
 public class ChatLogListWrapper
 {
     public ChatLog[] items;
