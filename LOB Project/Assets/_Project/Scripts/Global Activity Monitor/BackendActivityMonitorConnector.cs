@@ -87,4 +87,33 @@ public class BackendActivityMonitorConnector : MonoBehaviour
             return false;
         }
     }
+
+    // --- GET ACTIVITY (RECENT) ---
+    public async Task<int> GetActivityAsync()
+    {
+        using (UnityWebRequest request = UnityWebRequest.Get($"{baseUrl}/recent"))
+        {
+            var operation = request.SendWebRequest();
+            while (!operation.isDone) await Task.Yield();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                string json = request.downloadHandler.text;
+
+                ActivityMonitorWrapper wrapper = JsonUtility.FromJson<ActivityMonitorWrapper>(json);
+
+                int total = 0;
+
+                foreach (var item in wrapper.items)
+                {
+                    total += item.activityScore;
+                }
+                
+                return total;
+            }
+
+            Debug.LogError($"Recent Failed" + request.error);
+            return 0;
+        }
+    }
 }
