@@ -23,7 +23,7 @@ public class BackendChatLogConnectors : MonoBehaviour
                 // Wrap the array so JsonUtility can read it
                 string json = "{\"items\":" + request.downloadHandler.text + "}";
                 ChatLogListWrapper wrapper = JsonUtility.FromJson<ChatLogListWrapper>(json);
-                return new List<ChatLog>(wrapper.records);
+                return new List<ChatLog>(wrapper.items);
             }
             return null;
         }

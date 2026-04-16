@@ -17,6 +17,6 @@ public class ChatLog
 [SerializeField]
 public class ChatLogListWrapper
 {
-    public ChatLog[] records;
+    public ChatLog[] items;
 }
 

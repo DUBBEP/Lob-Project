@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class Clicker : MonoBehaviour
 {
     [SerializeField] private Clicker player;
     [SerializeField] private float max_distance;
+    //[SerializeField] private MouseLook m_MouseLook;
+
+    //private Camera m_Camera;
 
     private GameObject clickedObject;
     private bool isSwitched;
@@ -13,9 +17,17 @@ public class Clicker : MonoBehaviour
 
     public SwitchCams switcher;
 
+    /*
+    private void Start()
+    {
+        m_Camera = Camera.main;
+        m_MouseLook.Init(transform, m_Camera.transform);
+    }
+    */
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !isSwitched) // Left mouse button
+        if (Input.GetKeyDown(KeyCode.E) && !isSwitched) // Left mouse button
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -44,7 +56,8 @@ public class Clicker : MonoBehaviour
                 switcher.SwitchCameras();
                 isSwitched = true;
             }
-                
+
+            
         }
 
         if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.Tab)) && isSwitched)
