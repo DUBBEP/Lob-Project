@@ -24,7 +24,7 @@ public class StateRecorder : MonoBehaviour
         connector = FindFirstObjectByType<BackendGhostPlayerConnector>();
     }
 
-    public void StartRecording(Transform target, float duration)
+    public void StartRecording(Transform target, float duration, bool save = false)
     {
         if (isRecording)
         {
@@ -35,7 +35,7 @@ public class StateRecorder : MonoBehaviour
         log.startPosition = target.position;
         logDuration = duration;
         isRecording = true;
-        StartCoroutine(RecordState(target, duration));
+        StartCoroutine(RecordState(target, duration, save));
     }
 
     public async void SaveRecordingToDatabase()
@@ -62,7 +62,7 @@ public class StateRecorder : MonoBehaviour
             Debug.LogError("Save failed.");
     }
 
-    private IEnumerator RecordState(Transform target, float recordingDuration)
+    private IEnumerator RecordState(Transform target, float recordingDuration, bool save = false)
     {
         float recordTime = 0f;
         float interval = 0f;
@@ -90,5 +90,7 @@ public class StateRecorder : MonoBehaviour
         }
 
         isRecording = false;
+
+        if (save) SaveRecordingToDatabase();
     }
 }

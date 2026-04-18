@@ -1043,6 +1043,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 818752737}
+  - {fileID: 1596556895}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &695711388
@@ -1159,7 +1160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FlashBangEffect: {fileID: 642560781}
   fogColor: {r: 0.254717, g: 0.14538093, b: 0.14538093, a: 0}
-  _selectionWeight: 50
+  _selectionWeight: 1
 --- !u!114 &818752742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1242,9 +1243,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2080f80a304811e4682e75d8f67dabb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
-  recordingDuration: 0
-  _selectionWeight: 0.2
+  playerTransform: {fileID: 1254306374}
+  recordingDuration: 10
+  _selectionWeight: 1
 --- !u!1 &1136268940
 GameObject:
   m_ObjectHideFlags: 0
@@ -2494,12 +2495,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1596556893}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.1286051, y: 1.5013559, z: 0.2083539}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 7.408289, y: 1.4933926, z: 9.300342}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 695711387}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1609259209
 GameObject:
@@ -3116,7 +3117,6 @@ SceneRoots:
   - {fileID: 1550730621}
   - {fileID: 1564519004}
   - {fileID: 695711387}
-  - {fileID: 1596556895}
   - {fileID: 1671565420}
   - {fileID: 89753537}
   - {fileID: 243004860}

@@ -15,11 +15,7 @@ public class LobotomyEffectRecordMovement : MonoBehaviour, ILobotomyEffect
 
     public void StartEffect(Transform selection)
     {
-        // start recording
-        StateRecorder.Instance.StartRecording(playerTransform, recordingDuration);
-
-        // save recording to database after complete
-        Invoke(nameof(StateRecorder.Instance.SaveRecordingToDatabase), recordingDuration + 1);
+        StateRecorder.Instance.StartRecording(playerTransform, recordingDuration, true);
     }
 
     public void StopEffect(Transform selection) { }
