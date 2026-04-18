@@ -29,7 +29,7 @@ public class APITestTemplate : MonoBehaviour
         // uncomment
         // urlField.text = apiManager.GetURL();
         DisplayURL();
-        DebugObjects();
+        // DebugObjects();
     }
 
     public void ChangeURL(TMP_InputField field)
@@ -40,7 +40,7 @@ public class APITestTemplate : MonoBehaviour
 
     public void DebugIndexMethod()
     {
-        DebugObjects();
+        // DebugObjects();
     }
 
     private void DisplayURL()
@@ -48,6 +48,7 @@ public class APITestTemplate : MonoBehaviour
         // urlDisplay.text = "Current URL: " + apiManager.GetURL();
     }
 
+    /*
     private async void DebugObjects()
     {
         // replace string with your container and make sure the index method is correct
@@ -69,4 +70,5 @@ public class APITestTemplate : MonoBehaviour
             // Debug.Log("Your request probably failed.");
         }
     }
+    */
 }

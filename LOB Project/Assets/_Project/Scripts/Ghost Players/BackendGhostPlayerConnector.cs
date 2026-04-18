@@ -92,6 +92,12 @@ public class BackendGhostPlayerConnector : MonoBehaviour
                 }
             }
 
+            if (request.responseCode == 401)
+            {
+                AuthManager.Token = null;
+                // Trigger UI to show "Session Expired, please login again."
+            }
+
             // If we reach here, something went wrong
             Debug.LogError($"Store Failed. Code: {request.responseCode} | Error: {request.downloadHandler.text}");
             return false;

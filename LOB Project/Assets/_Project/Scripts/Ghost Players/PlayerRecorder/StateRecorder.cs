@@ -40,10 +40,16 @@ public class StateRecorder : MonoBehaviour
 
     public async void SaveRecordingToDatabase()
     {
+        if (!AuthManager.IsLoggedIn)
+        {
+            Debug.LogError("You must be logged in to save ghosts!");
+            return;
+        }
+
         Debug.Log($"Log being sent is {log}");
         GhostRecord data = new GhostRecord()
         {
-            username = "TempUsername", // Method call to get Username
+            username = AuthManager.GetUsername(),
             actions = log,
             duration = logDuration,
         };
