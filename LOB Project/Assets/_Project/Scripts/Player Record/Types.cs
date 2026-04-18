@@ -5,8 +5,9 @@ using UnityEngine;
 
 
 
-    // Start is called before the first frame update
+// Start is called before the first frame update
 
+[System.Serializable]
 public class PlayerRecord
 {
     public int id;
@@ -16,8 +17,9 @@ public class PlayerRecord
     public string ToJson() => JsonUtility.ToJson(this);
 }
 
-public class PlayerRecodListWrapper
+[System.Serializable]
+public class PlayerRecordListWrapper
 {
-    public PlayerRecord[] records;
+    public PlayerRecord[] items;
 }
 

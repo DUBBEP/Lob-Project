@@ -21,9 +21,19 @@ public class BackendPlayerRecordConnector : MonoBehaviour
             if (request.result == UnityWebRequest.Result.Success)
             {
                 // Wrap the array so JsonUtility can read it
+                string rawText = request.downloadHandler.text;
                 string json = "{\"items\":" + request.downloadHandler.text + "}";
-                PlayerRecodListWrapper wrapper = JsonUtility.FromJson<PlayerRecodListWrapper>(json);
-                return new List<PlayerRecord>(wrapper.records);
+                PlayerRecordListWrapper wrapper = JsonUtility.FromJson<PlayerRecordListWrapper>(json);
+                
+                if (wrapper != null && wrapper.items != null)
+                {
+                    return new List<PlayerRecord>(wrapper.items);
+                }
+                else
+                {
+                    Debug.LogError($"Failed to parse JSON. Raw API response: {rawText}");
+                    return null;
+                }
             }
             return null;
         }
