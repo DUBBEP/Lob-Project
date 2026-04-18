@@ -1,13 +1,24 @@
+using System.Text;
+using System.Threading.Tasks;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.Networking;
-using System.Threading.Tasks;
-using System.Text;
 
 public class AuthConnector : MonoBehaviour
 {
     private string baseUrl = "http://127.0.0.1:8000/api";
 
-    public async Task<bool> Login(string username, string password)
+    public static AuthConnector Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(this);
+    }
+
+    public async Task<LoginResponse> Login(string username, string password)
     {
         LoginFields fields = new LoginFields { name = username, password = password };
         string json = JsonUtility.ToJson(fields);
@@ -34,15 +45,17 @@ public class AuthConnector : MonoBehaviour
                 PlayerPrefs.SetString("CurrentUsername", response.user.name);
 
                 Debug.Log("Login Successful! Token stored.");
-                return true;
+
+                return MakeResponse(true, request);
             }
 
             Debug.LogError("Login Failed: " + request.downloadHandler.text);
-            return false;
+
+            return MakeResponse(false, request);
         }
     }
 
-    public async Task<bool> Register(string username, string password)
+    public async Task<LoginResponse> Register(string username, string password)
     {
         // Note: Laravel 'confirmed' rule looks for 'password_confirmation'
         string json = "{\"name\":\"" + username + "\", \"password\":\"" + password + "\", \"password_confirmation\":\"" + password + "\"}";
@@ -64,11 +77,11 @@ public class AuthConnector : MonoBehaviour
                 AuthResponse response = JsonUtility.FromJson<AuthResponse>(request.downloadHandler.text);
                 AuthManager.Token = response.token;
                 PlayerPrefs.SetString("CurrentUsername", response.user.name);
-                return true;
+                return MakeResponse(true, request);
             }
 
             Debug.LogError("Registration Failed: " + request.downloadHandler.text);
-            return false;
+            return MakeResponse(false, request);
         }
     }
 
@@ -98,5 +111,50 @@ public class AuthConnector : MonoBehaviour
             PlayerPrefs.DeleteKey("CurrentUsername");
             return true;
         }
+    }
+
+    public async Task<bool> IsTokenValidAsync()
+    {
+        string token = PlayerPrefs.GetString("AuthToken", "");
+
+        if (string.IsNullOrEmpty(token))
+        {
+            Debug.Log("No token found in local storage.");
+            return false;
+        }
+
+        using (UnityWebRequest request = UnityWebRequest.Get("http://127.0.0.1:8000/api/user"))
+        {
+            // Standard Laravel/Sanctum Headers
+            request.SetRequestHeader("Authorization", "Bearer " + token);
+            request.SetRequestHeader("Accept", "application/json");
+
+            // We "await" the request until it finishes
+            var operation = request.SendWebRequest();
+
+            while (!operation.isDone)
+                await Task.Yield();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                Debug.Log($"Welcome back! Server confirmed: {request.downloadHandler.text}");
+                return true;
+            }
+            else
+            {
+                Debug.LogWarning($"Session invalid (Code: {request.responseCode}). Clearing token.");
+                PlayerPrefs.DeleteKey("AuthToken");
+                return false;
+            }
+        }
+    }
+
+    private LoginResponse MakeResponse(bool success, UnityWebRequest request)
+    {
+        return new LoginResponse()
+        {
+            success = success,
+            response = JsonUtility.FromJson<LaravelErrorResponse>(request.downloadHandler.text),
+        };
     }
 }
