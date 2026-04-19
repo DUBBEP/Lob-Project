@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class LobotomyEffectReloadScene : MonoBehaviour, ILobotomyEffect
 {
-    [SerializeField] private float resetTimer;
+    [Range(10, 30)][SerializeField] private float minTime;
+    [Range(40, 60)][SerializeField] private float MaxTime;
     [SerializeField] private GameObject resetSequence;
 
+    private float resetTimer;
     bool countdown;
 
     [Range(1, 100)][SerializeField] private float _selectionWeight;
@@ -16,6 +18,9 @@ public class LobotomyEffectReloadScene : MonoBehaviour, ILobotomyEffect
 
     public void StartEffect(Transform selection)
     {
+        if (countdown == false)
+            resetTimer = Random.Range(minTime, MaxTime);
+        
         countdown = true;
     }
 

@@ -1215,9 +1215,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17348772e3da095458705f0675859ff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resetTimer: 30
+  minTime: 10
+  MaxTime: 60
   resetSequence: {fileID: 1931944118}
-  _selectionWeight: 50
+  _selectionWeight: 30
 --- !u!114 &818752747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3088,6 +3089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9149fe9cbd3d78547af488761a993e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leaderboardSceneName: Leaderboard
 --- !u!95 &1931944121
 Animator:
   serializedVersion: 5

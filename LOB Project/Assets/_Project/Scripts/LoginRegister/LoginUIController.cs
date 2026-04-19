@@ -69,7 +69,7 @@ public class LoginUIController : MonoBehaviour
         }
     }
 
-    private void LoadGameScene()
+    public void LoadGameScene()
     {
         SceneManager.LoadScene("Main");
     }
