@@ -9,6 +9,7 @@ public class LoginUIController : MonoBehaviour
     private string password;
 
     [SerializeField] private TextMeshProUGUI errorText;
+    [SerializeField] private float ErrorDisplayTime = 30f;
 
     private void Awake()
     {
@@ -36,6 +37,12 @@ public class LoginUIController : MonoBehaviour
 
     private void HandleResponse(LoginResponse responseData)
     {
+        if (responseData.response == null)
+        {
+            StartCoroutine(DisplayError("No Response From Server."));
+            return;
+        }
+
         if (responseData.success)
         {
             Debug.Log("Successfully Registered new user");
@@ -52,7 +59,7 @@ public class LoginUIController : MonoBehaviour
     private IEnumerator DisplayError(string message)
     {
         errorText.text = message;
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(ErrorDisplayTime);
         errorText.text = "";
     }
 
