@@ -827,7 +827,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chatLogText: {fileID: 82735304}
   chatInput: {fileID: 39594568}
-  chatLogConnectors: {fileID: 0}
+  chatLogConnectors: {fileID: 563373609}
 --- !u!4 &563373608
 Transform:
   m_ObjectHideFlags: 0
