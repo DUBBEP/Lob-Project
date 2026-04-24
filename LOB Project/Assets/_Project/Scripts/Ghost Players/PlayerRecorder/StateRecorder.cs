@@ -19,6 +19,7 @@ public class StateRecorder : MonoBehaviour
         else
             Destroy(this);
     }
+
     private void Start()
     {
         connector = FindFirstObjectByType<BackendGhostPlayerConnector>();

@@ -6,10 +6,16 @@ public class LobotomyEffectReloadScene : MonoBehaviour, ILobotomyEffect
     [Range(40, 60)][SerializeField] private float MaxTime;
     [SerializeField] private GameObject resetSequence;
 
+    private Timer scoreTracker;
     private float resetTimer;
     bool countdown;
 
     [Range(1, 100)][SerializeField] private float _selectionWeight;
+
+    private void Awake()
+    {
+        scoreTracker = gameObject.AddComponent<Timer>();
+    }
 
     public float GetEffectSelectionPriority()
     {
@@ -18,30 +24,30 @@ public class LobotomyEffectReloadScene : MonoBehaviour, ILobotomyEffect
 
     public void StartEffect(Transform selection)
     {
-        if (countdown == false)
-            resetTimer = Random.Range(minTime, MaxTime);
-        
+        if (countdown) return;
         countdown = true;
-        //SaveActivityScore(activityScore, username);
+
+        resetTimer = Random.Range(minTime, MaxTime);
+
+        RecordsHandler recordHandler = new RecordsHandler(
+            BackendActivityMonitorConnector.Instance,
+            BackendPlayerRecordConnector.Instance
+            );
+
+        recordHandler.UploadActivityRecord();
+        recordHandler.UploadPlayerRecord(scoreTracker.elapsedTime);
     }
 
     private void FixedUpdate()
     {
         if (countdown)
-        {
             resetTimer -= Time.deltaTime;
-        }
 
         if (resetTimer < 0)
-        {
             resetSequence.SetActive(true);
-        }
     }
 
-    public void StopEffect(Transform selection)
-    {
-
-    }
+    public void StopEffect(Transform selection) { }
 
     public async void SaveActivityScore(int aS, string uN)
     {
