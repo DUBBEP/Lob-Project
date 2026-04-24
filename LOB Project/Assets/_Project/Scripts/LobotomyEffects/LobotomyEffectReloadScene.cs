@@ -17,6 +17,7 @@ public class LobotomyEffectReloadScene : MonoBehaviour, ILobotomyEffect
     public void StartEffect(Transform selection)
     {
         countdown = true;
+        //SaveActivityScore(activityScore, username);
     }
 
     private void FixedUpdate()
@@ -35,5 +36,16 @@ public class LobotomyEffectReloadScene : MonoBehaviour, ILobotomyEffect
     public void StopEffect(Transform selection)
     {
 
+    }
+
+    public async void SaveActivityScore(int aS, string uN)
+    {
+        ActivityMonitor activityScoreToSend = new ActivityMonitor()
+        {
+            activityScore = aS,
+            userName = uN
+        };
+
+        bool success = await BackendActivityMonitorConnector.Instance.StoreObjectAsync(activityScoreToSend);
     }
 }
