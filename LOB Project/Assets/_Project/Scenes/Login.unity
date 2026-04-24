@@ -1116,6 +1116,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   errorText: {fileID: 1986805108}
+  ErrorDisplayTime: 30
+  nextSceneName: Leaderboard
 --- !u!114 &1405599204
 MonoBehaviour:
   m_ObjectHideFlags: 0

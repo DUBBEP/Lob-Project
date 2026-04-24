@@ -10,7 +10,7 @@ public class LoginUIController : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI errorText;
     [SerializeField] private float ErrorDisplayTime = 30f;
-
+    [SerializeField] private string nextSceneName = "Main";
     private void Awake()
     {
         CheckIfLoggedIn();
@@ -78,6 +78,6 @@ public class LoginUIController : MonoBehaviour
 
     public void LoadGameScene()
     {
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene(nextSceneName);
     }
 }
