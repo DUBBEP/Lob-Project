@@ -35,16 +35,13 @@ public class ChatBox : MonoBehaviour
     {
         if (chatInput.text.Length > 0)
         {
-            //Log("Steve", chatInput.text);
             LogToServe(chatInput.text);
-            //photonView.RPC("Log", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName, chatInput.text);
             chatInput.text = "";
         }
 
         EventSystem.current.SetSelectedGameObject(null);
     }
-
-    //[PunRPC]
+    
     void Log(string playerName, string message)
     {
         chatLogText.text += string.Format("<color=green><b>{0}:</b></color> <color=grey>{1}</color>\n", playerName, message);
@@ -53,8 +50,6 @@ public class ChatBox : MonoBehaviour
 
     async void LogToServe(string message)
     {
-       //chatLogText.text += string.Format("<b>{0}:<b/> {1}\n", playerName, message);
-
         ChatLog logToSend = new ChatLog()
         {
             message = message,
@@ -64,15 +59,9 @@ public class ChatBox : MonoBehaviour
         bool success = await chatLogConnectors.StoreObjectAsync(logToSend);
 
         if (success)
-        {
             Debug.Log("Message sent to sever");
-        }
         else
-        {
             Debug.Log("No message sent to server");
-        }
-
-        //chatLogText.rectTransform.sizeDelta = new Vector2(chatLogText.rectTransform.sizeDelta.x, chatLogText.mesh.bounds.size.y + 20);
     }
 
     async void LogFromServe()
