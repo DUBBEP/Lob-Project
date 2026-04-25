@@ -1,20 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
-//using Photon.Pun;
 
-public class ChatBox : MonoBehaviour//Pun
+public class ChatBox : MonoBehaviour
 {
     public TextMeshProUGUI chatLogText;
     public TMP_InputField chatInput;
 
     public BackendChatLogConnectors chatLogConnectors;
 
-    // intance
     public static ChatBox instance;
 
     void Awake()
@@ -51,8 +47,7 @@ public class ChatBox : MonoBehaviour//Pun
     //[PunRPC]
     void Log(string playerName, string message)
     {
-        chatLogText.text += string.Format("<b>{0}:<b/> {1}\n", playerName, message);
-
+        chatLogText.text += string.Format("<color=green><b>{0}:</b></color> <color=grey>{1}</color>\n", playerName, message);
         chatLogText.rectTransform.sizeDelta = new Vector2(chatLogText.rectTransform.sizeDelta.x, chatLogText.mesh.bounds.size.y + 20);
     }
 

@@ -19,6 +19,4 @@ public class SwitchCams : MonoBehaviour
         selection_manager.enabled = !selection_manager.enabled;
         computer_canvas.enabled = !computer_canvas.enabled;
     }
-
-
 }

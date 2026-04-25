@@ -36,7 +36,6 @@ public class ResponsiveSelector : MonoBehaviour, ISelector
                 _selection = selectables[i].transform;
             }
         }
-
     }
 
     public Transform GetSelection()
