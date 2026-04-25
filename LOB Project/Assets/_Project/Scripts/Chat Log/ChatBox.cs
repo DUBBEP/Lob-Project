@@ -53,7 +53,7 @@ public class ChatBox : MonoBehaviour
         ChatLog logToSend = new ChatLog()
         {
             message = message,
-            username = "Steve",
+            username = AuthManager.GetUsername(),
         };
 
         bool success = await chatLogConnectors.StoreObjectAsync(logToSend);
