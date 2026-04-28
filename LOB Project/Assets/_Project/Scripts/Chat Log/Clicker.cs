@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 [RequireComponent(typeof(ClickerHint))]
 public class Clicker : MonoBehaviour
 {
+    [SerializeField] private FirstPersonController playerController;
     [SerializeField] private Transform player;
     [SerializeField] private Transform targetObject;
     [SerializeField] private float max_distance;
@@ -21,6 +23,7 @@ public class Clicker : MonoBehaviour
         {
             switcher.SwitchCameras();
             isSwitched = false;
+            playerController.enabled = true;
         }
         if (isSwitched) return;
 
@@ -34,6 +37,7 @@ public class Clicker : MonoBehaviour
         {
             switcher.SwitchCameras();
             isSwitched = true;
+            playerController.enabled = false;
         }
     }
 

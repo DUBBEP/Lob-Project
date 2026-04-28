@@ -17,6 +17,7 @@ public class ChatBox : MonoBehaviour
     {
         instance = this;
         StartCoroutine(CallServer());
+        LogFromServe();
     }
 
     private void Update()
@@ -59,9 +60,14 @@ public class ChatBox : MonoBehaviour
         bool success = await chatLogConnectors.StoreObjectAsync(logToSend);
 
         if (success)
+        {
             Debug.Log("Message sent to sever");
+            LogFromServe();
+        }
         else
+        {
             Debug.Log("No message sent to server");
+        }
     }
 
     async void LogFromServe()
@@ -79,13 +85,15 @@ public class ChatBox : MonoBehaviour
         {
             Debug.Log("No Logs on Server");
         }
+        float height = chatLogText.preferredHeight;
+        chatLogText.rectTransform.sizeDelta = new Vector2(chatLogText.rectTransform.sizeDelta.x, height);
     }
 
     IEnumerator CallServer()
     {
         while (true)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(60);
             LogFromServe();
         }
     }

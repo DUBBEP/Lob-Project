@@ -797,6 +797,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 43305695}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &472281941 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5741098254046406217, guid: f6e5590a84a9d5746b72072cedb1d6ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 2089393121}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &561231097 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5741098253632980542, guid: f6e5590a84a9d5746b72072cedb1d6ac,
@@ -818,7 +824,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 563373608}
-  - component: {fileID: 563373607}
   m_Layer: 0
   m_Name: _Game Manager
   m_TagString: Untagged
@@ -826,21 +831,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &563373607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 563373606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 296e9539f87a57b4e9f244ae35f33585, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chatLogText: {fileID: 998454684}
-  chatInput: {fileID: 561231097}
-  chatLogConnectors: {fileID: 1921271386}
 --- !u!4 &563373608
 Transform:
   m_ObjectHideFlags: 0
@@ -929,7 +919,7 @@ Canvas:
   m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1865915711}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1202,7 +1192,7 @@ MonoBehaviour:
   followSpeed: 0.3
   _slidingAudio: {fileID: 392952741}
   player: {fileID: 1254306374}
-  _selectionWeight: 1
+  _selectionWeight: 50
 --- !u!114 &818752739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1217,7 +1207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followSpeed: 0.05
   player: {fileID: 1254306374}
-  _selectionWeight: 1
+  _selectionWeight: 50
 --- !u!114 &818752740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1232,7 +1222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleEffectPrefab: {fileID: 3859277395000615260, guid: 19bc9ba8ec3160741aeea7b631634303,
     type: 3}
-  _selectionWeight: 1
+  _selectionWeight: 50
 --- !u!114 &818752741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1247,7 +1237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FlashBangEffect: {fileID: 642560781}
   fogColor: {r: 0.254717, g: 0.14538093, b: 0.14538093, a: 0}
-  _selectionWeight: 1
+  _selectionWeight: 50
 --- !u!114 &818752742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1261,7 +1251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audio: {fileID: 1609259211}
-  _selectionWeight: 1
+  _selectionWeight: 50
 --- !u!114 &818752744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1275,7 +1265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audio: {fileID: 1352217376}
-  _selectionWeight: 1
+  _selectionWeight: 50
 --- !u!114 &818752745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1289,7 +1279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audio: {fileID: 1308792868}
-  _selectionWeight: 1
+  _selectionWeight: 50
 --- !u!114 &818752746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1305,7 +1295,7 @@ MonoBehaviour:
   minTime: 20
   MaxTime: 60
   resetSequence: {fileID: 1931944118}
-  _selectionWeight: 30
+  _selectionWeight: 2
 --- !u!1 &837964562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1374,6 +1364,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1043279401 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5741098253017599655, guid: f6e5590a84a9d5746b72072cedb1d6ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 2089393121}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1254306373
@@ -3274,13 +3276,18 @@ PrefabInstance:
     - target: {fileID: 5741098253017599655, guid: f6e5590a84a9d5746b72072cedb1d6ac,
         type: 3}
       propertyPath: m_Size
-      value: 0.39936945
+      value: 0.3503478
       objectReference: {fileID: 0}
     - target: {fileID: 5741098253017599655, guid: f6e5590a84a9d5746b72072cedb1d6ac,
         type: 3}
       propertyPath: m_Value
-      value: -0.00000042334665
+      value: 0.00000036977016
       objectReference: {fileID: 0}
+    - target: {fileID: 5741098253017599655, guid: f6e5590a84a9d5746b72072cedb1d6ac,
+        type: 3}
+      propertyPath: m_HandleRect
+      value: 
+      objectReference: {fileID: 472281941}
     - target: {fileID: 5741098254046406217, guid: f6e5590a84a9d5746b72072cedb1d6ac,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -3421,10 +3428,25 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5741098254905197019, guid: f6e5590a84a9d5746b72072cedb1d6ac,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741098254944697438, guid: f6e5590a84a9d5746b72072cedb1d6ac,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741098254944697438, guid: f6e5590a84a9d5746b72072cedb1d6ac,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.35036007
+      objectReference: {fileID: 0}
     - target: {fileID: 5741098254944697438, guid: f6e5590a84a9d5746b72072cedb1d6ac,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000038146973
+      value: -0.000076293945
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3493,6 +3515,7 @@ GameObject:
   - component: {fileID: 2113521675}
   - component: {fileID: 2113521674}
   - component: {fileID: 2113521676}
+  - component: {fileID: 2113521677}
   m_Layer: 0
   m_Name: _ChatBoxHandler
   m_TagString: Untagged
@@ -3560,6 +3583,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hintText: {fileID: 449697802}
+--- !u!114 &2113521677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113521672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f6049ea9a7e5c44a6bae35f09b6e06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScrollbar: {fileID: 1043279401}
+  scrollSensitivity: 0.1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

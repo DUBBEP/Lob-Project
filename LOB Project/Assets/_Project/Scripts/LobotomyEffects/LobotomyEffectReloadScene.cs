@@ -28,14 +28,6 @@ public class LobotomyEffectReloadScene : MonoBehaviour, ILobotomyEffect
         countdown = true;
 
         resetTimer = Random.Range(minTime, MaxTime);
-
-        RecordsHandler recordHandler = new RecordsHandler(
-            BackendActivityMonitorConnector.Instance,
-            BackendPlayerRecordConnector.Instance
-            );
-
-        recordHandler.UploadActivityRecord();
-        recordHandler.UploadPlayerRecord(scoreTracker.elapsedTime);
     }
 
     private void FixedUpdate()
@@ -44,7 +36,17 @@ public class LobotomyEffectReloadScene : MonoBehaviour, ILobotomyEffect
             resetTimer -= Time.deltaTime;
 
         if (resetTimer < 0)
+        {
+            RecordsHandler recordHandler = new RecordsHandler(
+                BackendActivityMonitorConnector.Instance,
+                BackendPlayerRecordConnector.Instance
+                );
+
+            recordHandler.UploadActivityRecord();
+            recordHandler.UploadPlayerRecord(scoreTracker.elapsedTime);
             resetSequence.SetActive(true);
+            Debug.Log("Uploading Player record");
+        }
     }
 
     public void StopEffect(Transform selection) { }
@@ -53,8 +55,8 @@ public class LobotomyEffectReloadScene : MonoBehaviour, ILobotomyEffect
     {
         ActivityMonitor activityScoreToSend = new ActivityMonitor()
         {
-            activityScore = aS,
-            userName = uN
+            activity_score = aS,
+            username = uN
         };
 
         bool success = await BackendActivityMonitorConnector.Instance.StoreObjectAsync(activityScoreToSend);

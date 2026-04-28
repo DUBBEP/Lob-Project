@@ -16,8 +16,8 @@ public class RecordsHandler
     {
         ActivityMonitor activityRecord = new ActivityMonitor()
         {
-            userName = AuthManager.GetUsername(),
-            activityScore = 10,
+            username = AuthManager.GetUsername(),
+            activity_score = 10,
         };
 
         bool test = await activityConnector.StoreObjectAsync(activityRecord);

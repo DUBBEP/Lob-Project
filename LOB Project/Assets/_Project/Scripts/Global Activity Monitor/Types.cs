@@ -6,8 +6,8 @@ using UnityEngine;
 public class ActivityMonitor
 {
     public int id;
-    public string userName;
-    public int activityScore;
+    public string username;
+    public int activity_score;
 
     public string ToJson() => JsonUtility.ToJson(this);
 }
