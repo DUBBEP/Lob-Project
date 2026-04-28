@@ -627,7 +627,7 @@ MonoBehaviour:
   leaderboardContainer: {fileID: 2027676166}
   playerInfo: {fileID: 6576932400720327082, guid: 324773028dc0ffb43a935f137df60358,
     type: 3}
-  displayCount: 5
+  displayCount: 10
 --- !u!114 &1802529151
 MonoBehaviour:
   m_ObjectHideFlags: 0

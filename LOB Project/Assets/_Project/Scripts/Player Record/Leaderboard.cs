@@ -20,10 +20,12 @@ public class Leaderboard : MonoBehaviour
     private async void pullRecords()
     {
         List<PlayerRecord> items = await apiManager.GetIndexAsync();
+        int rank = 0;
 
         foreach (PlayerRecord item in items)
         {
-            Debug.Log($"Username: {item.username} Score: {item.score}");
+            rank++;
+            Debug.Log($"#{rank} Username: {item.username} Score: {item.score}");
         }
 
         sortPlayerScores(items);
@@ -51,11 +53,11 @@ public class Leaderboard : MonoBehaviour
             PlayerRecord item = sortedPlayerRecords[counter];
 
             GameObject playerInfoContainer = Instantiate(playerInfo, leaderboardContainer.transform);
-            PlayerInfoUI playerInfoUI = playerInfoContainer.GetComponent<PlayerInfoUI>();
+            PlayerInfoUI playerInfoUI = playerInfoContainer.GetComponentInChildren<PlayerInfoUI>();
 
             if (playerInfoUI != null)
             {
-                playerInfoUI.fillPlayerInfo(item);
+                playerInfoUI.fillPlayerInfo(item, counter + 1);
             }
         }
     }

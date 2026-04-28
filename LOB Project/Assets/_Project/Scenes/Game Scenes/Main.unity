@@ -2131,6 +2131,18 @@ MonoBehaviour:
   computer_camera: {fileID: 1865915711}
   selection_manager: {fileID: 1564519003}
   computer_canvas: {fileID: 618161987}
+--- !u!114 &1510046965 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1254306373}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510046958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05ec5cf00ca181d45a42ba1870e148c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1533654016
 GameObject:
   m_ObjectHideFlags: 0
@@ -3565,6 +3577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f1f5a0177f8c6946b66dc3ef82c14e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 1510046965}
   player: {fileID: 1254306374}
   targetObject: {fileID: 1382776213}
   max_distance: 5

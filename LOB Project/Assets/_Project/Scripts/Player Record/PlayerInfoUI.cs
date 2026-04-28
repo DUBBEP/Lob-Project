@@ -5,10 +5,12 @@ using TMPro;
 
 public class PlayerInfoUI : MonoBehaviour
 {
-    [SerializeField] public TMP_Text playerInfo;
+    [SerializeField] private TMP_Text playerInfo;
 
-    public void fillPlayerInfo(PlayerRecord item)
+    private void Awake() => playerInfo = GetComponent<TMP_Text>();
+
+    public void fillPlayerInfo(PlayerRecord item, int rank = 0)
     {
-        playerInfo.text = $"{item.username} <pos=75%>{item.score}";
+        playerInfo.text = $"{rank} <pos=10%>{item.username} <pos=75%>{item.score}";
     }
 }
