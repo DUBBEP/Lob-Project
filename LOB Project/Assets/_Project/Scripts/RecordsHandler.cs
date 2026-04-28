@@ -44,8 +44,8 @@ public class RecordsHandler
     private void LogSuccess(bool success)
     {
         if (success)
-            Debug.Log("Activity Record Upload Successful");
+            Debug.Log("Player Record Upload Successful");
         else
-            Debug.Log("Activity Record Upload Failed");
+            Debug.Log("Player Record Upload Failed");
     }
 }

@@ -16,6 +16,11 @@ public class Leaderboard : MonoBehaviour
     public int displayCount;
     private int counter;
 
+    private void Start()
+    {
+        pullRecords();
+    }
+
     //call API at start of scene to pull player records 
     private async void pullRecords()
     {
@@ -30,6 +35,13 @@ public class Leaderboard : MonoBehaviour
 
         sortPlayerScores(items);
         addToLeaderboard(items);
+        
+        int playerRank = GetPlayerRank(items);
+
+        if (playerRank >= 0)
+        {
+            AddNewRecord(items, playerRank);
+        }
     }
 
     //sort by scores high to low
@@ -50,20 +62,48 @@ public class Leaderboard : MonoBehaviour
 
         for (counter = 0; counter < displayCount; counter++)
         {
-            PlayerRecord item = sortedPlayerRecords[counter];
-
-            GameObject playerInfoContainer = Instantiate(playerInfo, leaderboardContainer.transform);
-            PlayerInfoUI playerInfoUI = playerInfoContainer.GetComponentInChildren<PlayerInfoUI>();
-
-            if (playerInfoUI != null)
-            {
-                playerInfoUI.fillPlayerInfo(item, counter + 1);
-            }
+            AddNewRecord(sortedPlayerRecords, counter);
         }
     }
-    private void Start()
+
+    private void AddNewRecord(List<PlayerRecord> sortedPlayerRecords, int index)
     {
-        pullRecords();
+        Debug.Log($"passed index was {index}");
+
+        PlayerRecord item = sortedPlayerRecords[index];
+
+        GameObject playerInfoContainer = Instantiate(playerInfo, leaderboardContainer.transform);
+        PlayerInfoUI playerInfoUI = playerInfoContainer.GetComponentInChildren<PlayerInfoUI>();
+
+        if (playerInfoUI != null)
+        {
+            if (index == 0)
+                playerInfoUI.fillPlayerInfo(item, index + 1, Color.yellow);
+            else if (index == 1)
+                playerInfoUI.fillPlayerInfo(item, index + 1, Color.blue);
+            else if (index == 2)
+                playerInfoUI.fillPlayerInfo(item, index + 1, Color.red);
+            else if (item.username == AuthManager.GetUsername())
+                playerInfoUI.fillPlayerInfo(item, index + 1, Color.green);
+            else
+                playerInfoUI.fillPlayerInfo(item, index + 1);
+        }
     }
 
+    private int GetPlayerRank(List<PlayerRecord> sortedPlayerRecords)
+    {
+        string playerName = AuthManager.GetUsername();
+        for (int i = 0; i < sortedPlayerRecords.Count; i++)
+        {
+            if (playerName == sortedPlayerRecords[i].username)
+            {
+                if (i <= 9)
+                    return -1;
+                else
+                    return i;
+            }
+        }
+
+        return -1;
+    }
 }
