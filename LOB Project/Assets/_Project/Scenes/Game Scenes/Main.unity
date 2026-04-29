@@ -1876,7 +1876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63709392d487c6344bd0c82584cb30ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LobotomyEscalationValue: 650
+  LobotomyEscalationValue: 1000
   _audio: {fileID: 495497871}
   _selectionWeight: 20
 --- !u!114 &818752750
@@ -1891,7 +1891,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63709392d487c6344bd0c82584cb30ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LobotomyEscalationValue: 9000
+  LobotomyEscalationValue: 1500
   _audio: {fileID: 73451909}
   _selectionWeight: 50
 --- !u!114 &818752751
@@ -1906,7 +1906,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63709392d487c6344bd0c82584cb30ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LobotomyEscalationValue: 900
+  LobotomyEscalationValue: 1500
   _audio: {fileID: 758893170}
   _selectionWeight: 50
 --- !u!114 &818752752
@@ -1921,7 +1921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63709392d487c6344bd0c82584cb30ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LobotomyEscalationValue: 900
+  LobotomyEscalationValue: 1500
   _audio: {fileID: 98018446}
   _selectionWeight: 50
 --- !u!1 &837964562
@@ -2086,7 +2086,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 311
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 8200000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: BypassEffects
