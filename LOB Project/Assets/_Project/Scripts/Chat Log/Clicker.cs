@@ -1,70 +1,73 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 
+[RequireComponent(typeof(ClickerHint))]
 public class Clicker : MonoBehaviour
 {
-    [SerializeField] private Clicker player;
+    [SerializeField] private FirstPersonController playerController;
+    [SerializeField] private Transform player;
+    [SerializeField] private Transform targetObject;
     [SerializeField] private float max_distance;
-    //[SerializeField] private MouseLook m_MouseLook;
-
-    //private Camera m_Camera;
-
-    private GameObject clickedObject;
+    [SerializeField] private float lookThreshold;
     private bool isSwitched;
-    private float distance;
+    private ClickerHint hint;
+
+    private void Awake() => hint = GetComponent<ClickerHint>();
 
     public SwitchCams switcher;
-
-    /*
-    private void Start()
-    {
-        m_Camera = Camera.main;
-        m_MouseLook.Init(transform, m_Camera.transform);
-    }
-    */
-
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse0))  && !isSwitched) // Left mouse button
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+        hint.ToggleHint(false);
 
-            if (Physics.Raycast(ray, out hit))
-            {
-                clickedObject = hit.collider.gameObject;
-                //Debug.Log("You clicked on " + clickedObject.name);
-            }
-            else
-            { 
-                clickedObject = null;
-            }
-
-
-            if (clickedObject != null)
-            {
-                distance = Vector3.Distance(player.transform.position, clickedObject.transform.position);
-            }
-
-            //Debug.Log("Distance from " + clickedObject + ": " + distance);
-
-            if (distance <= max_distance)
-            {
-                Debug.Log("You Selected " + clickedObject + " at distance " + distance);
-                switcher.SwitchCameras();
-                isSwitched = true;
-            }
-
-            
-        }
-
-        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.Tab)) && isSwitched)
+        if ((Input.GetKeyDown(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.Tab)) && isSwitched)
         {
             switcher.SwitchCameras();
             isSwitched = false;
+            playerController.enabled = true;
+        }
+        if (isSwitched) return;
+
+        if (!CheckDistanceToTarget()) return;
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (!CheckLookPercentage(ray)) return;
+        hint.ToggleHint(true);
+
+        if ((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse0))  && !isSwitched) // Left mouse button
+        {
+            switcher.SwitchCameras();
+            isSwitched = true;
+            playerController.enabled = false;
+        }
+    }
+
+    private bool CheckDistanceToTarget()
+    {
+        if (Vector3.Distance(player.position, targetObject.position) <= max_distance)
+        {
+            return true;
         }
 
+        return false;
+    }
+
+    private bool CheckLookPercentage(Ray ray)
+    {
+        float activeThreshold = 0f;
+
+        if (Vector3.Distance(player.position, targetObject.position) < 1.5f)
+            activeThreshold = lookThreshold * 0.7f;
+        else
+            activeThreshold = lookThreshold;
+
+            Vector3 Vector1 = ray.direction;
+        Vector3 Vector2 = targetObject.position - ray.origin;
+
+        float lookPercentage = Vector3.Dot(Vector1.normalized, Vector2.normalized);
+
+        if (lookPercentage > activeThreshold)
+            return true;
+
+        return false;
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class BackendActivityMonitorConnector : MonoBehaviour
 {
-    private string baseUrl = "http://127.0.0.1:8000/api/ActivityMonitor";
+    [SerializeField] private string baseUrl = "http://127.0.0.1:8000/api/ActivityRecord";
 
     public static BackendActivityMonitorConnector Instance;
 
@@ -67,13 +67,21 @@ public class BackendActivityMonitorConnector : MonoBehaviour
     // --- SAVE NEW (STORE) ---
     public async Task<bool> StoreObjectAsync(ActivityMonitor data)
     {
+        if (!AuthManager.IsLoggedIn)
+        {
+            Debug.LogError("Cannot save: User not logged in.");
+            return false;
+        }
+
         string json = JsonUtility.ToJson(data);
         using (UnityWebRequest request = new UnityWebRequest(baseUrl, "POST"))
         {
             byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
             request.uploadHandler = new UploadHandlerRaw(bodyRaw);
             request.downloadHandler = new DownloadHandlerBuffer();
+            request.SetRequestHeader("Accept", "application/json");
             request.SetRequestHeader("Content-Type", "application/json");
+            request.SetRequestHeader("Authorization", "Bearer " + AuthManager.Token);
 
             var operation = request.SendWebRequest();
             while (!operation.isDone) await Task.Yield();
@@ -109,7 +117,7 @@ public class BackendActivityMonitorConnector : MonoBehaviour
 
             if (request.result == UnityWebRequest.Result.Success)
             {
-                string json = request.downloadHandler.text;
+                string json = "{\"items\":" + request.downloadHandler.text + "}";
 
                 ActivityMonitorWrapper wrapper = JsonUtility.FromJson<ActivityMonitorWrapper>(json);
 
@@ -117,7 +125,7 @@ public class BackendActivityMonitorConnector : MonoBehaviour
 
                 foreach (var item in wrapper.items)
                 {
-                    total += item.activityScore;
+                    total += item.activity_score;
                 }
                 
                 return total;

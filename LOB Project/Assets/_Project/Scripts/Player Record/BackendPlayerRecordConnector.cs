@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 public class BackendPlayerRecordConnector : MonoBehaviour
 {
-    private string baseUrl = "http://127.0.0.1:8000/api/PlayerRecords";
+    public static BackendPlayerRecordConnector Instance { get; private set; }
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(this);
+    }
+
+    [SerializeField] private string baseUrl = "http://127.0.0.1:8000/api/PlayerRecords";
     public void SetURL(string url) => baseUrl = url;
     public string GetURL() => baseUrl;
 
@@ -66,6 +75,12 @@ public class BackendPlayerRecordConnector : MonoBehaviour
     // --- SAVE NEW (STORE) ---
     public async Task<bool> StoreObjectAsync(PlayerRecord data)
     {
+        if (!AuthManager.IsLoggedIn)
+        {
+            Debug.LogError("Cannot save: User not logged in.");
+            return false;
+        }
+
         string json = JsonUtility.ToJson(data);
         using (UnityWebRequest request = new UnityWebRequest(baseUrl, "POST"))
         {
@@ -73,6 +88,7 @@ public class BackendPlayerRecordConnector : MonoBehaviour
             request.uploadHandler = new UploadHandlerRaw(bodyRaw);
             request.downloadHandler = new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
+            request.SetRequestHeader("Authorization", "Bearer " + AuthManager.Token);
 
             var operation = request.SendWebRequest();
             while (!operation.isDone) await Task.Yield();
@@ -90,6 +106,12 @@ public class BackendPlayerRecordConnector : MonoBehaviour
                     data.id = savedData.id;
                     return true;
                 }
+            }
+
+            if (request.responseCode == 401)
+            {
+                AuthManager.Token = null;
+                // Trigger UI to show "Session Expired, please login again."
             }
 
             // If we reach here, something went wrong

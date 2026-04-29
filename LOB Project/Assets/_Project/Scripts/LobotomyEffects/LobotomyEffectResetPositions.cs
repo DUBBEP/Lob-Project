@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class LobotomyEffectResetPositions : MonoBehaviour, ILobotomyEffect
 {
+    [SerializeField] Material newSkybox;
     [SerializeField] private GameObject FlashBangEffect;
     [SerializeField] private Color fogColor;
     [Range(1, 100)][SerializeField] private float _selectionWeight;
@@ -34,6 +35,7 @@ public class LobotomyEffectResetPositions : MonoBehaviour, ILobotomyEffect
         {
             state.ResetState();
         }
+
         FlashBangEffect.SetActive(true);
 
         RenderSettings.fogDensity = 0.12f;
@@ -41,6 +43,27 @@ public class LobotomyEffectResetPositions : MonoBehaviour, ILobotomyEffect
         RenderSettings.ambientIntensity = 0;
         RenderSettings.subtractiveShadowColor = Color.red;
         RenderSettings.ambientLight = Color.red;
+        
+
+        // turn off lights
+        Light[] lights = FindObjectsByType<Light>(FindObjectsSortMode.None);
+        foreach (Light light in lights)
+        {
+            if (light.type == LightType.Directional)
+                light.gameObject.SetActive(false);
+        }
+
+        ChangeSkybox();
+    }
+
+    public void ChangeSkybox()
+    {
+        if (newSkybox != null)
+        {
+            RenderSettings.skybox = newSkybox;
+            
+            DynamicGI.UpdateEnvironment();
+        }
     }
 
     public void StopEffect(Transform selection) { }

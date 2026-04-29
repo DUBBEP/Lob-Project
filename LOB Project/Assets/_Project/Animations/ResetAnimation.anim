@@ -121,7 +121,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 7.0833335
-    functionName: ReloadScene
+    functionName: LoadLeaderboard
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

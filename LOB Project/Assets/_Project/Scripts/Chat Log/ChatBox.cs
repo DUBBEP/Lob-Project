@@ -1,26 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
-//using Photon.Pun;
 
-public class ChatBox : MonoBehaviour//Pun
+public class ChatBox : MonoBehaviour
 {
     public TextMeshProUGUI chatLogText;
     public TMP_InputField chatInput;
 
     public BackendChatLogConnectors chatLogConnectors;
 
-    // intance
     public static ChatBox instance;
 
     void Awake()
     {
         instance = this;
         StartCoroutine(CallServer());
+        LogFromServe();
     }
 
     private void Update()
@@ -39,31 +36,25 @@ public class ChatBox : MonoBehaviour//Pun
     {
         if (chatInput.text.Length > 0)
         {
-            //Log("Steve", chatInput.text);
             LogToServe(chatInput.text);
-            //photonView.RPC("Log", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName, chatInput.text);
             chatInput.text = "";
         }
 
         EventSystem.current.SetSelectedGameObject(null);
     }
-
-    //[PunRPC]
+    
     void Log(string playerName, string message)
     {
-        chatLogText.text += string.Format("<b>{0}:<b/> {1}\n", playerName, message);
-
+        chatLogText.text += string.Format("<color=green><b>{0}:</b></color> <color=grey>{1}</color>\n", playerName, message);
         chatLogText.rectTransform.sizeDelta = new Vector2(chatLogText.rectTransform.sizeDelta.x, chatLogText.mesh.bounds.size.y + 20);
     }
 
     async void LogToServe(string message)
     {
-       //chatLogText.text += string.Format("<b>{0}:<b/> {1}\n", playerName, message);
-
         ChatLog logToSend = new ChatLog()
         {
             message = message,
-            username = "Steve",
+            username = AuthManager.GetUsername(),
         };
 
         bool success = await chatLogConnectors.StoreObjectAsync(logToSend);
@@ -71,18 +62,19 @@ public class ChatBox : MonoBehaviour//Pun
         if (success)
         {
             Debug.Log("Message sent to sever");
+            LogFromServe();
         }
         else
         {
             Debug.Log("No message sent to server");
         }
-
-        //chatLogText.rectTransform.sizeDelta = new Vector2(chatLogText.rectTransform.sizeDelta.x, chatLogText.mesh.bounds.size.y + 20);
     }
 
     async void LogFromServe()
     {
         List<ChatLog> chats = await chatLogConnectors.GetIndexAsync();
+
+        chatLogText.text = "";
 
         if (chats != null)
         {
@@ -95,13 +87,15 @@ public class ChatBox : MonoBehaviour//Pun
         {
             Debug.Log("No Logs on Server");
         }
+        float height = chatLogText.preferredHeight;
+        chatLogText.rectTransform.sizeDelta = new Vector2(chatLogText.rectTransform.sizeDelta.x, height);
     }
 
     IEnumerator CallServer()
     {
         while (true)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(60);
             LogFromServe();
         }
     }

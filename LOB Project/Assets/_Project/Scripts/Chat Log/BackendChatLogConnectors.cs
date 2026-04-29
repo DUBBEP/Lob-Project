@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class BackendChatLogConnectors : MonoBehaviour
 {
-    private string baseUrl = "http://127.0.0.1:8000/api/ChatLog";
+    [SerializeField] private string baseUrl = "http://127.0.0.1:8000/api/ChatLog";
     public void SetURL(string url) => baseUrl = url;
     public string GetURL() => baseUrl;
 
@@ -56,6 +56,12 @@ public class BackendChatLogConnectors : MonoBehaviour
     // --- SAVE NEW (STORE) ---
     public async Task<bool> StoreObjectAsync(ChatLog data)
     {
+        if (!AuthManager.IsLoggedIn)
+        {
+            Debug.LogError("Cannot save: User not logged in.");
+            return false;
+        }
+
         string json = JsonUtility.ToJson(data);
         using (UnityWebRequest request = new UnityWebRequest(baseUrl, "POST"))
         {
@@ -63,6 +69,7 @@ public class BackendChatLogConnectors : MonoBehaviour
             request.uploadHandler = new UploadHandlerRaw(bodyRaw);
             request.downloadHandler = new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
+            request.SetRequestHeader("Authorization", "Bearer " + AuthManager.Token);
 
             var operation = request.SendWebRequest();
             while (!operation.isDone) await Task.Yield();

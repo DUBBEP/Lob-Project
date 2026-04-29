@@ -19,12 +19,13 @@ public class StateRecorder : MonoBehaviour
         else
             Destroy(this);
     }
+
     private void Start()
     {
         connector = FindFirstObjectByType<BackendGhostPlayerConnector>();
     }
 
-    public void StartRecording(Transform target, float duration)
+    public void StartRecording(Transform target, float duration, bool save = false)
     {
         if (isRecording)
         {
@@ -35,15 +36,21 @@ public class StateRecorder : MonoBehaviour
         log.startPosition = target.position;
         logDuration = duration;
         isRecording = true;
-        StartCoroutine(RecordState(target, duration));
+        StartCoroutine(RecordState(target, duration, save));
     }
 
     public async void SaveRecordingToDatabase()
     {
+        if (!AuthManager.IsLoggedIn)
+        {
+            Debug.LogError("You must be logged in to save ghosts!");
+            return;
+        }
+
         Debug.Log($"Log being sent is {log}");
         GhostRecord data = new GhostRecord()
         {
-            username = "TempUsername", // Method call to get Username
+            username = AuthManager.GetUsername(),
             actions = log,
             duration = logDuration,
         };
@@ -56,7 +63,7 @@ public class StateRecorder : MonoBehaviour
             Debug.LogError("Save failed.");
     }
 
-    private IEnumerator RecordState(Transform target, float recordingDuration)
+    private IEnumerator RecordState(Transform target, float recordingDuration, bool save = false)
     {
         float recordTime = 0f;
         float interval = 0f;
@@ -84,5 +91,7 @@ public class StateRecorder : MonoBehaviour
         }
 
         isRecording = false;
+
+        if (save) SaveRecordingToDatabase();
     }
 }
