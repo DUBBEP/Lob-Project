@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class BackendActivityMonitorConnector : MonoBehaviour
 {
-    private string baseUrl = "http://127.0.0.1:8000/api/ActivityRecord";
+    [SerializeField] private string baseUrl = "http://127.0.0.1:8000/api/ActivityRecord";
 
     public static BackendActivityMonitorConnector Instance;
 

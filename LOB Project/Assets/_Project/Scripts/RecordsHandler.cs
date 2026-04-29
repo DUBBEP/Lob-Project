@@ -4,7 +4,6 @@ public class RecordsHandler
 {
     private BackendActivityMonitorConnector activityConnector;
     private BackendPlayerRecordConnector playerRecordConnector;
-    private float elapsedTime = 0f;
     
     public RecordsHandler(BackendActivityMonitorConnector activity, BackendPlayerRecordConnector player)
     {

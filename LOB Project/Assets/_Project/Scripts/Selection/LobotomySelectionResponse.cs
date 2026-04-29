@@ -14,6 +14,8 @@ public class LobotomySelectionResponse : MonoBehaviour, ISelectionResponse
 
     private void Start()
     {
+        Debug.Log("Selection Occurances: " + selectionOcurrenceCounter);
+        selectionOcurrenceCounter = 0;
         _lobotomyEffects = lobotomyEffectsHolder.GetComponents<ILobotomyEffect>().ToList();
     }
 

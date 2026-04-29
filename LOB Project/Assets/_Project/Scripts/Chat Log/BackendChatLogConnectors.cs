@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class BackendChatLogConnectors : MonoBehaviour
 {
-    private string baseUrl = "http://127.0.0.1:8000/api/ChatLog";
+    [SerializeField] private string baseUrl = "http://127.0.0.1:8000/api/ChatLog";
     public void SetURL(string url) => baseUrl = url;
     public string GetURL() => baseUrl;
 

@@ -27,6 +27,8 @@ public class Leaderboard : MonoBehaviour
         List<PlayerRecord> items = await apiManager.GetIndexAsync();
         int rank = 0;
 
+        if (items != null || items.Count <= 0) return;
+
         foreach (PlayerRecord item in items)
         {
             rank++;

@@ -20,6 +20,9 @@ public class SelectionManager : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("Selector is " + _selector);
+        Debug.Log("ray provider is " + _rayProvider);
+
         _selector.Check(_rayProvider.CreateRay());
         var selection = _selector.GetSelection();
 

@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 
 public class AuthConnector : MonoBehaviour
 {
-    private string baseUrl = "http://127.0.0.1:8000/api";
+    [SerializeField] private string baseUrl = "http://127.0.0.1:8000/api";
 
     public static AuthConnector Instance;
 

@@ -74,6 +74,8 @@ public class ChatBox : MonoBehaviour
     {
         List<ChatLog> chats = await chatLogConnectors.GetIndexAsync();
 
+        chatLogText.text = "";
+
         if (chats != null)
         {
             foreach (ChatLog chatLog in chats)

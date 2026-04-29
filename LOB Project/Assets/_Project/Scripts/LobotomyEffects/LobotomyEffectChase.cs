@@ -26,6 +26,13 @@ public class LobotomyEffectChase : MonoBehaviour, ILobotomyEffect
 
     public void StopEffect(Transform selection)
     {
+        float stopDelay = Random.Range(1f, 9f);
+
+        Invoke(nameof(StopChase), stopDelay);
+    }
+
+    private void StopChase()
+    {
         _effectIsActive = false;
         _selection = null;
         _slidingAudio.Stop();

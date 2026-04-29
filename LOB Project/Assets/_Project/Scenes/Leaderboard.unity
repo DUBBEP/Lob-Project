@@ -640,6 +640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113e927545c999f488b0d14bc960b855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseUrl: http://54.92.160.213/api/PlayerRecords
 --- !u!1 &1811937566
 GameObject:
   m_ObjectHideFlags: 0
