@@ -28,6 +28,8 @@ public class LobotomyEffectGhostReplay : MonoBehaviour, ILobotomyEffect
 
     private ReplayData MakeRandomReplay()
     {
+        if (ghosts == null || ghosts.Count == 0) return null;
+
         return new ReplayData()
         {
             target = null,
@@ -37,6 +39,8 @@ public class LobotomyEffectGhostReplay : MonoBehaviour, ILobotomyEffect
 
     public void StartEffect(Transform selection)
     {
+        if (ghosts == null || ghosts.Count == 0) return;
+
         ReplayData newReplay = MakeRandomReplay();
         newReplay.target = selection;
         StateReplay replay = StateReplay.Instance;

@@ -9,6 +9,7 @@ public class LobotomyEffectReloadScene : MonoBehaviour, ILobotomyEffect
     private Timer scoreTracker;
     private float resetTimer;
     bool countdown;
+    private bool recordsSent;
 
     [Range(1, 100)][SerializeField] private float _selectionWeight;
 
@@ -37,15 +38,22 @@ public class LobotomyEffectReloadScene : MonoBehaviour, ILobotomyEffect
 
         if (resetTimer < 0)
         {
-            RecordsHandler recordHandler = new RecordsHandler(
-                BackendActivityMonitorConnector.Instance,
-                BackendPlayerRecordConnector.Instance
-                );
+            if (recordsSent == false)
+            {
+                RecordsHandler recordHandler = new RecordsHandler(
+                    BackendActivityMonitorConnector.Instance,
+                    BackendPlayerRecordConnector.Instance
+                    );
 
-            recordHandler.UploadActivityRecord();
-            recordHandler.UploadPlayerRecord(scoreTracker.elapsedTime);
+                recordHandler.UploadActivityRecord();
+                recordHandler.UploadPlayerRecord(scoreTracker.elapsedTime);
+                Debug.Log("Uploading Player record");
+
+                recordsSent = true;
+            }
+
             resetSequence.SetActive(true);
-            Debug.Log("Uploading Player record");
+
         }
     }
 

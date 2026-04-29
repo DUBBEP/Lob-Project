@@ -3,7 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class Reseter : MonoBehaviour
 {
-    [SerializeField] private string leaderboardSceneName = "Leaderboard";
     public void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -11,6 +10,6 @@ public class Reseter : MonoBehaviour
 
     public void LoadLeaderboard()
     {
-        SceneManager.LoadScene(leaderboardSceneName);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

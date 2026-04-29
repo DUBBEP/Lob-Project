@@ -47,7 +47,7 @@ public class Leaderboard : MonoBehaviour
     //sort by scores high to low
     private void sortPlayerScores(List<PlayerRecord> unsortedPLayerRecords)
     {
-        unsortedPLayerRecords.Sort((a, b) => b.score.CompareTo(a.score));
+        unsortedPLayerRecords.Sort((a, b) => a.score.CompareTo(b.score));
     }
 
     //add container for each top # highest scores and their usernames 

@@ -1,15 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 public class LobotomySelectionResponse : MonoBehaviour, ISelectionResponse
 {
-    [SerializeField]
-    private GameObject lobotomyEffectsHolder;
+    [SerializeField] private GameObject lobotomyEffectsHolder;
+    [Range(0, 100000)][SerializeField] private int lobotomyDefense;
 
     private List<ILobotomyEffect> _lobotomyEffects;
     private ILobotomyEffect _currentEffect;
+
+    public static int selectionOcurrenceCounter { get; private set; } = 0;
 
     private void Start()
     {
@@ -18,13 +19,35 @@ public class LobotomySelectionResponse : MonoBehaviour, ISelectionResponse
 
     public void OnSelect(Transform selection)
     {
-        _currentEffect = SelectWeightedOptions(_lobotomyEffects);
-        _currentEffect.StartEffect(selection);
+        selectionOcurrenceCounter++;
+
+        if (HandleEscalation())
+            TryLobotomyEffect(selection);
+        else
+            return;
     }
 
     public void OnDeselect(Transform selection)
     {
-        _currentEffect.StopEffect(selection);
+        if (_currentEffect != null)
+        {
+            _currentEffect.StopEffect(selection);
+        }
+    }
+
+    private bool HandleEscalation()
+    {
+        int roll = Random.Range(0, lobotomyDefense);
+        if (roll < selectionOcurrenceCounter)
+            return true;
+
+        return false;
+    }
+
+    private void TryLobotomyEffect(Transform selection)
+    {
+        _currentEffect = SelectWeightedOptions(_lobotomyEffects);
+        _currentEffect.StartEffect(selection);
     }
 
     private ILobotomyEffect SelectWeightedOptions(List<ILobotomyEffect> effects)
