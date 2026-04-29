@@ -1530,7 +1530,7 @@ MonoBehaviour:
   heartSoundPrefab: {fileID: 3859277395000615260, guid: 9d300486e974e9d47aac7d00988dc7e0,
     type: 3}
   pulseRate: 0.899
-  _selectionWeight: 15.1
+  _selectionWeight: 6
 --- !u!1 &837964562
 GameObject:
   m_ObjectHideFlags: 0
