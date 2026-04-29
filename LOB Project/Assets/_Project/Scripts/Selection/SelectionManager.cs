@@ -15,14 +15,10 @@ public class SelectionManager : MonoBehaviour
         _selector = GetComponent<ISelector>();
         _rayProvider = GetComponent<IRayProvider>();
         SceneManager.LoadScene("Environment", LoadSceneMode.Additive);
-        SceneManager.LoadScene("UI", LoadSceneMode.Additive);
     }
 
     private void Update()
     {
-        Debug.Log("Selector is " + _selector);
-        Debug.Log("ray provider is " + _rayProvider);
-
         _selector.Check(_rayProvider.CreateRay());
         var selection = _selector.GetSelection();
 

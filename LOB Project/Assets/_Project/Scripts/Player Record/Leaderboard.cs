@@ -1,10 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
-using Unity.Services.Analytics;
-using UnityEditor.Search;
 using UnityEngine;
-using System.Linq;
 
 public class Leaderboard : MonoBehaviour
 {
@@ -26,8 +21,6 @@ public class Leaderboard : MonoBehaviour
     {
         List<PlayerRecord> items = await apiManager.GetIndexAsync();
         int rank = 0;
-
-        if (items != null || items.Count <= 0) return;
 
         foreach (PlayerRecord item in items)
         {
@@ -64,7 +57,8 @@ public class Leaderboard : MonoBehaviour
 
         for (counter = 0; counter < displayCount; counter++)
         {
-            AddNewRecord(sortedPlayerRecords, counter);
+            if (counter < sortedPlayerRecords.Count)
+                AddNewRecord(sortedPlayerRecords, counter);
         }
     }
 

@@ -1,10 +1,8 @@
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class LobotomyEffectResetPositions : MonoBehaviour, ILobotomyEffect
 {
-    [SerializeField] LightingSettings scaryLighting;
     [SerializeField] Material newSkybox;
     [SerializeField] private GameObject FlashBangEffect;
     [SerializeField] private Color fogColor;
@@ -39,8 +37,6 @@ public class LobotomyEffectResetPositions : MonoBehaviour, ILobotomyEffect
         }
 
         FlashBangEffect.SetActive(true);
-
-        Lightmapping.lightingSettings = scaryLighting;
 
         RenderSettings.fogDensity = 0.12f;
         RenderSettings.fogColor = fogColor;

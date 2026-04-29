@@ -23,13 +23,11 @@ public class LobotomyEffectGhostReplay : MonoBehaviour, ILobotomyEffect
 
     private async void GetRandomRecords()
     {
-        ghosts = await connector.GetRandomRecordsAsync();
+        ghosts = await connector.GetIndexAsync();
     }
 
     private ReplayData MakeRandomReplay()
     {
-        if (ghosts == null || ghosts.Count == 0) return null;
-
         return new ReplayData()
         {
             target = null,
@@ -39,7 +37,10 @@ public class LobotomyEffectGhostReplay : MonoBehaviour, ILobotomyEffect
 
     public void StartEffect(Transform selection)
     {
-        if (ghosts == null || ghosts.Count == 0) return;
+        Debug.Log("Doing Ghost Replay");
+
+        Debug.Log($"ghost replay is {ghosts}");
+        Debug.Log($"ghost replay count is {ghosts.Count}");
 
         ReplayData newReplay = MakeRandomReplay();
         newReplay.target = selection;

@@ -18,19 +18,11 @@ public class ResponsiveSelector : MonoBehaviour, ISelector
 
     public void Check(Ray ray)
     {
-        Debug.Log("Selecatables are " + selectables);
         _selection = null;
 
         var closest = 0f;
         for (int i = 0; i < selectables.Count; i++)
         {
-            Debug.Log("In loop" + i);
-
-            Debug.Log("Ray direction" + ray.direction);
-            Debug.Log("we have " + selectables.Count);
-
-            Debug.Log("Selectable is" + selectables[i].gameObject);
-
             var Vector1 = ray.direction;
             var Vector2 = selectables[i].transform.position - ray.origin;
 
@@ -44,8 +36,6 @@ public class ResponsiveSelector : MonoBehaviour, ISelector
                 _selection = selectables[i].transform;
             }
         }
-
-        Debug.Log("Selection after checing is " + _selection);
     }
 
     public Transform GetSelection()

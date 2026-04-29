@@ -1331,7 +1331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 493d6368b2adc7740b3a9851ff44f62e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followSpeed: 0.36
+  followSpeed: 0.12
   player: {fileID: 1254306374}
   _selectionWeight: 50
 --- !u!114 &818752740
@@ -1361,12 +1361,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0bea60ff8578e419667b2a7f26fe2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaryLighting: {fileID: 4890085278179872738, guid: 14e8d4570acb22f45beb07a8b78b894a,
-    type: 2}
   newSkybox: {fileID: 2100000, guid: 2039a0ad0a9d05549928b70362f54902, type: 2}
   FlashBangEffect: {fileID: 642560781}
   fogColor: {r: 0.09411765, g: 0.105882354, b: 0.11764706, a: 0}
-  _selectionWeight: 15
+  _selectionWeight: 13
 --- !u!114 &818752742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1381,7 +1379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LobotomyEscalationValue: 400
   _audio: {fileID: 1609259211}
-  _selectionWeight: 50
+  _selectionWeight: 20
 --- !u!114 &818752744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1442,7 +1440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 1254306374}
   recordingDuration: 10
-  _selectionWeight: 15
+  _selectionWeight: 0.1
 --- !u!114 &818752748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1485,7 +1483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LobotomyEscalationValue: 600
   _audio: {fileID: 73451909}
-  _selectionWeight: 50
+  _selectionWeight: 20
 --- !u!114 &818752751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1500,7 +1498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LobotomyEscalationValue: 600
   _audio: {fileID: 758893170}
-  _selectionWeight: 50
+  _selectionWeight: 20
 --- !u!114 &818752752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1515,7 +1513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LobotomyEscalationValue: 600
   _audio: {fileID: 98018446}
-  _selectionWeight: 50
+  _selectionWeight: 20
 --- !u!1 &837964562
 GameObject:
   m_ObjectHideFlags: 0
