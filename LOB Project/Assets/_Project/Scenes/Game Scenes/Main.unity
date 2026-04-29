@@ -1281,6 +1281,7 @@ GameObject:
   - component: {fileID: 818752746}
   - component: {fileID: 818752748}
   - component: {fileID: 818752747}
+  - component: {fileID: 818752753}
   m_Layer: 0
   m_Name: LobotomyEffects
   m_TagString: Untagged
@@ -1514,6 +1515,22 @@ MonoBehaviour:
   LobotomyEscalationValue: 600
   _audio: {fileID: 98018446}
   _selectionWeight: 20
+--- !u!114 &818752753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818752736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a99472a12d3a521419c8a78c95fb55a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartSoundPrefab: {fileID: 3859277395000615260, guid: 9d300486e974e9d47aac7d00988dc7e0,
+    type: 3}
+  pulseRate: 0.899
+  _selectionWeight: 15.1
 --- !u!1 &837964562
 GameObject:
   m_ObjectHideFlags: 0
