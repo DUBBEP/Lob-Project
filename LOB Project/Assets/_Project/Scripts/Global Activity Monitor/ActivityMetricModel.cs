@@ -7,7 +7,15 @@ public class ActivityMetricModel : MonoBehaviour
 
     private async void Start()
     {
-        int result = await BackendActivityMonitorConnector.Instance.GetActivityAsync();
+        List<ActivityMonitor> items = await BackendActivityMonitorConnector.Instance.GetIndexAsync();
+
+        int result = 0;
+
+        foreach(ActivityMonitor item in items)
+        {
+            result += item.activity_score;
+        }
+
         Debug.Log("Activity Score is " + result);
 
         if (result <= 0)
